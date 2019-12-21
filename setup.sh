@@ -124,21 +124,21 @@ then
     echo -ne "RUBY DEP INSTALLATION       [\e[1;30;1;1;47min progress\e[0m]\r"
     {
         sudo dnf -y install git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
-    } > logs/out5.log 2> logs/err5.log
+    } > logs/out6.log 2> logs/err6.log
     echo -ne "RUBY DEP INSTALLATION       [\e[1;37;1;1;42m   +done   \e[0m]"
     echo
     # Step 5.2 : Installing bundler
     echo -ne "BUNDLER INSTALLATION        [\e[1;30;1;1;47min progress\e[0m]\r"
     {
         gem install bundler
-    } > logs/out5.log 2> logs/err5.log
+    } > logs/out7.log 2> logs/err7.log
     echo -ne "BUNDLER INSTALLATION        [\e[1;37;1;1;42m   +done   \e[0m]"
     echo
     # Step 5.2 : Installing bundler
     echo -ne "BUNDLER INSTALLATION        [\e[1;30;1;1;47min progress\e[0m]\r"
     {
         gem install rails
-    } > logs/out5.log 2> logs/err5.log
+    } > logs/out8.log 2> logs/err8.log
     echo -ne "BUNDLER INSTALLATION        [\e[1;37;1;1;42m   +done   \e[0m]"
     echo
     # Step 5.3 : Showing informations
