@@ -91,7 +91,7 @@ echo
 # Step 3 : Installing esential packages
 echo -ne "PACKAGES INSTALLATION       [\e[1;30;1;1;47min progress\e[0m]\r"
 {
-    sudo dnf -y install nano wget
+    sudo dnf -y install nano wget yum-utils
 } > logs/out3.log 2> logs/err3.log
 echo -ne "PACKAGES INSTALLATION       [\e[1;37;1;1;42m   +done   \e[0m]"
 echo
@@ -130,6 +130,7 @@ then
     # Step 5.2 : Installing bundler
     echo -ne "BUNDLER INSTALLATION        [\e[1;30;1;1;47min progress\e[0m]\r"
     {
+        echo "gem: --no-document" > ~/.gemrc
         gem install bundler
     } > logs/out7.log 2> logs/err7.log
     echo -ne "BUNDLER INSTALLATION        [\e[1;37;1;1;42m   +done   \e[0m]"
