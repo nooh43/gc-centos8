@@ -4,7 +4,7 @@
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 #| This script will initialize the sysetm with one click
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Version : V 0.0.2
+#| Version : V 0.0.3
 #| Author  : Nasser Alhumood
 #| .-.    . . .-.-.
 #| |.|.-.-|-.-|-`-..-,.-.. .
@@ -14,7 +14,7 @@
 clear
 
 # Some Unnecessary Variables, but they're here anyway
-version=V0.0.2
+version=V0.0.3
 oss="CentOS8"
 
 # Welcome Massage
@@ -147,6 +147,21 @@ then
     ruby -v
     echo "Your rails version is:"
     rails -v
+fi
+
+# Step 6 : Installing lamp
+echo
+read -p "Would you like to install LAMP ? [y/N] "
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo -ne "HTTPD INSTALLATION          [\e[1;30;1;1;47min progress\e[0m]\r"
+    {
+        sudo yum install httpd
+        sudo systemctl start httpd.service
+        sudo systemctl enable httpd.service
+    } > logs/out9.log 2> logs/err9.log
+    echo -ne "HTTPD INSTALLATION          [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo
 fi
 
 
