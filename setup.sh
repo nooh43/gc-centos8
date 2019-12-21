@@ -156,7 +156,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo -ne "HTTPD INSTALLATION          [\e[1;30;1;1;47min progress\e[0m]\r"
     {
-        sudo yum install httpd
+        sudo dnf -y install httpd
         sudo systemctl start httpd.service
         sudo systemctl enable httpd.service
     } > logs/out9.log 2> logs/err9.log
@@ -165,7 +165,7 @@ then
     # Step 6.1 : Showing informations
     echo -ne "MYSQL INSTALLATION          [\e[1;30;1;1;47min progress\e[0m]\r"
     {
-        sudo yum install mariadb-server mariadb
+        sudo dnf -y install mariadb-server mariadb
         sudo systemctl start mariadb
         sudo systemctl enable mariadb
     } > logs/out10.log 2> logs/err10.log
@@ -174,7 +174,7 @@ then
     # Step 6.2 : Showing informations
     echo -ne "MYSQL INSTALLATION          [\e[1;30;1;1;47min progress\e[0m]\r"
     {
-        sudo yum install php php-mysql
+        sudo dnf -y install php php-mysql
         sudo systemctl restart httpd.service
     } > logs/out11.log 2> logs/err11.log
     echo -ne "MYSQL INSTALLATION          [\e[1;37;1;1;42m   +done   \e[0m]"
