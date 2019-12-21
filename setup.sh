@@ -4,7 +4,7 @@
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 #| This script will initialize the sysetm with one click
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Version : V 0.0.1
+#| Version : V 0.0.2
 #| Author  : Nasser Alhumood
 #| .-.    . . .-.-.
 #| |.|.-.-|-.-|-`-..-,.-.. .
@@ -14,7 +14,7 @@
 clear
 
 # Some Unnecessary Variables, but they're here anyway
-version=V0.0.1
+version=V0.0.2
 oss="CentOS8"
 
 # Welcome Massage
@@ -97,7 +97,8 @@ echo -ne "PACKAGES INSTALLATION       [\e[1;37;1;1;42m   +done   \e[0m]"
 echo
 
 # Step 4 : Installing Development Tools and C
-read -p "Would you like to install ? [y/N] "
+echo
+read -p "Would you like to install Development Tools and C language ? [y/N] "
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo -ne "DEVTOOLS AND C INSTALLATION [\e[1;30;1;1;47min progress\e[0m]\r"
@@ -107,6 +108,46 @@ then
     echo -ne "DEVTOOLS AND C INSTALLATION [\e[1;37;1;1;42m   +done   \e[0m]"
     echo
 fi
+
+# Step 5 : Installing ruby on rails
+echo
+read -p "Would you like to install ruby on rails ? [y/N] "
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo -ne "RUBY INSTALLATION           [\e[1;30;1;1;47min progress\e[0m]\r"
+    {
+        sudo dnf -y install ruby ruby-devel
+    } > logs/out5.log 2> logs/err5.log
+    echo -ne "RUBY INSTALLATION           [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo
+    # Step 5.1 : Installing ruby dep
+    echo -ne "RUBY DEP INSTALLATION       [\e[1;30;1;1;47min progress\e[0m]\r"
+    {
+        sudo dnf -y install git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+    } > logs/out5.log 2> logs/err5.log
+    echo -ne "RUBY DEP INSTALLATION       [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo
+    # Step 5.2 : Installing bundler
+    echo -ne "BUNDLER INSTALLATION        [\e[1;30;1;1;47min progress\e[0m]\r"
+    {
+        gem install bundler
+    } > logs/out5.log 2> logs/err5.log
+    echo -ne "BUNDLER INSTALLATION        [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo
+    # Step 5.2 : Installing bundler
+    echo -ne "BUNDLER INSTALLATION        [\e[1;30;1;1;47min progress\e[0m]\r"
+    {
+        gem install rails
+    } > logs/out5.log 2> logs/err5.log
+    echo -ne "BUNDLER INSTALLATION        [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo
+    # Step 5.3 : Showing informations
+    echo "Your Ruby version is:"
+    ruby -v
+    echo "Your rails version is:"
+    rails -v
+fi
+
 
 # The End
 echo
