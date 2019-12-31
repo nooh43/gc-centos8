@@ -4,7 +4,7 @@
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 #| This script will initialize the sysetm with one click
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Version : V 0.1.0
+#| Version : V 0.1.1
 #| Author  : Nasser Alhumood
 #| .-.    . . .-.-.
 #| |.|.-.-|-.-|-`-..-,.-.. .
@@ -14,7 +14,7 @@
 clear
 
 # Some Unnecessary Variables, but they're here anyway
-version=V0.1.0
+version=V0.1.1
 oss="CentOS8"
 
 # Welcome Massage
@@ -186,6 +186,7 @@ echo
 read -p "Would you like to install wordpress stack ? [y/N] "
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    chmod +x apps/wordpress.sh
     sudo ./apps/wordpress.sh
     echo
 fi
