@@ -4,7 +4,7 @@
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 #| This script installs wordpress on lamp with ssl
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Version : V 0.0.2
+#| Version : V 0.0.3
 #| Author  : Nasser Alhumood
 #| .-.    . . .-.-.
 #| |.|.-.-|-.-|-`-..-,.-.. .
@@ -41,7 +41,8 @@ echo -ne "Preparation stage           [\e[1;30;1;1;47min progress\e[0m]\r"
     sudo systemctl enable mariadb
     sudo systemctl enable httpd
 } &> /dev/null
-echo -ne "SYSTEM UPDATE               [\e[1;37;1;1;42m   +done   \e[0m]"
+echo -ne "Preparation stage           [\e[1;37;1;1;42m   +done   \e[0m]"
+echo
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
@@ -93,7 +94,7 @@ EOM
         sudo chown -R apache:apache /var/www/www.$DOMAINNAME
         sudo chcon -t httpd_sys_rw_content_t /var/www/www.$DOMAINNAME -R
         # Restart httpd
-        systemctl restart httpd
+        sudo systemctl restart httpd
         # Print Done
         echo -e "VIRTUAL HOST CREATION       [\e[1;37;1;1;42m   +done   \e[0m]"
         echo
