@@ -4,7 +4,7 @@
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 #| This script will initialize the sysetm with one click
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Version : V 0.0.5
+#| Version : V 0.1.0
 #| Author  : Nasser Alhumood
 #| .-.    . . .-.-.
 #| |.|.-.-|-.-|-`-..-,.-.. .
@@ -14,7 +14,7 @@
 clear
 
 # Some Unnecessary Variables, but they're here anyway
-version=V0.0.5
+version=V0.1.0
 oss="CentOS8"
 
 # Welcome Massage
@@ -177,7 +177,16 @@ then
         sudo dnf -y install php php-mysql
         sudo systemctl restart httpd.service
     } > logs/out11.log 2> logs/err11.log
-    echo -ne "MYSQL INSTALLATION          [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo -ne "PHP INSTALLATION            [\e[1;37;1;1;42m   +done   \e[0m]"
+    echo
+fi
+
+# Step 7 : wordpress
+echo
+read -p "Would you like to install wordpress stack ? [y/N] "
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo ./apps/wordpress.sh
     echo
 fi
 
