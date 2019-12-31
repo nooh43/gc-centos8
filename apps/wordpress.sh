@@ -4,7 +4,7 @@
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 #| This script installs wordpress on lamp with ssl
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Version : V 0.0.1
+#| Version : V 0.0.2
 #| Author  : Nasser Alhumood
 #| .-.    . . .-.-.
 #| |.|.-.-|-.-|-`-..-,.-.. .
@@ -21,6 +21,8 @@
 #| Environment  : update, install, firewall-cmd, systemctl, mv, chmod
 #| Packages     : php-mysqlnd, php-fpm, mariadb-server, httpd, tar, curl, php-json, mod_ssl, certbot(curl)
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
+echo -ne "Preparation stage           [\e[1;30;1;1;47min progress\e[0m]\r"
+{
     # Updating the system
     sudo dnf -y update
     # Instaling LAMP packages and mod_ssl
@@ -38,6 +40,8 @@
     sudo systemctl start httpd
     sudo systemctl enable mariadb
     sudo systemctl enable httpd
+} &> /dev/null
+echo -ne "SYSTEM UPDATE               [\e[1;37;1;1;42m   +done   \e[0m]"
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
@@ -65,10 +69,8 @@
         echo -n "what is your domain name (without www): "
         # Store the domain name in variable DOMAINNAME
         read DOMAINNAME
-        # Variable : File directory of the template
-        VHOST_FILE = "wordpress/www.$DOMAINNAME.conf"
         # Write the data of the virtual host into the template file
-cat <<EOM >$VHOST_FILE
+cat <<EOM >apps/wordpress/www.$DOMAINNAME.conf
 <VirtualHost *:80>
   ServerName $DOMAINNAME
   ServerAlias www.$DOMAINNAME
@@ -84,7 +86,7 @@ cat <<EOM >$VHOST_FILE
 </VirtualHost>
 EOM
         # Move the template to its location
-        sudo mv wordpress/www.$DOMAINNAME.conf /etc/httpd/conf.d/www.$DOMAINNAME.conf
+        sudo mv apps/wordpress/www.$DOMAINNAME.conf /etc/httpd/conf.d/www.$DOMAINNAME.conf
         # Create a folder for the wordpress space
         sudo mkdir -p /var/www/www.$DOMAINNAME
         # Give the wordpress space its Permissions
@@ -126,7 +128,7 @@ EOM
 #| user on what to do next and how to proceed with his
 #| stack installation.
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
-#| Environment  :
+#| Environment  : cat
 #| Packages     : (NONE)
 #|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
     # Print Congrats
@@ -143,12 +145,7 @@ EOM
     echo -e "\e[31;1m  1- Run this command to secure MySQL and set its root password:  \e[0m"
     echo -e "\e[31;1m  sudo mysql_secure_installation  \e[0m"
     echo -e "\e[31;1m  2- Create a new database with name wordpress and user admin and password pass:  \e[0m"
-    echo -e "\e[31;1m  sudo mysql -u root -p  \e[0m"
-    echo -e "\e[31;1m  > CREATE DATABASE wordpress;  \e[0m"
-    echo -e "\e[31;1m  > CREATE USER `admin`@`localhost` IDENTIFIED BY 'pass';  \e[0m"
-    echo -e "\e[31;1m  > GRANT ALL ON wordpress.* TO `admin`@`localhost`;  \e[0m"
-    echo -e "\e[31;1m  > FLUSH PRIVILEGES;  \e[0m"
-    echo -e "\e[31;1m  > exit  \e[0m"
+    cat apps/wordpress/HowToDatabase.txt
     # Wordpress instruction
     echo
     echo
